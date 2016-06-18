@@ -19,13 +19,51 @@ dependencies:
 ```crystal
 require "string_inflection"
 
-StringInflection.camel("foo bar") # => "fooBar"
+StringInflection.camel("foo bar")  # => "fooBar"
 StringInflection.pascal("foo bar") # => "FooBar"
-StringInflection.snake("foo bar") # => "foo_bar"
-StringInflection.kebab("foo bar") # => "foo-bar"
+StringInflection.snake("foo bar")  # => "foo_bar"
+StringInflection.kebab("foo bar")  # => "foo-bar"
 ```
 
-## Mixin
+## The Case Module
+
+Would you like shorthand? You can use `Case` instead of the long name `StringInflection`.
+
+```crystal
+require "string_inflection/case"
+
+Case.camel("foo bar")
+```
+
+## String#to
+
+The special extension `String#to` makes things object-oriented.
+
+```crystal
+require "string_inflection/string/to"
+```
+
+Then you can:
+
+```crystal
+"foo bar".to.camel # => "fooBar"
+```
+
+If you don't intend pollute the String's namespace with the method #to, the `StringInflection.define_inflector` macro helps you.
+
+```crystal
+class String
+  StringInflection.define_inflector name: "inflectTo"
+end
+```
+
+And you can:
+
+```crystal
+"foo bar".inflectTo.camel
+```
+
+## Mixins
 
 You can mix the inflector methods into your own namespace.
 
@@ -51,9 +89,26 @@ end
 
 And you can:
 
-```
+```crystal
 "foo bar".camel
 ```
+
+Calling the `StringInflection.define_instance_methods(object)` macro, the inflector methods will be defined like:
+
+```crystal
+class String
+  def camel
+    StringInflection.camel(self)
+  end
+end
+```
+
+## Releases
+
+* v0.1.1
+  * Case
+  * String#to
+  * StringInflection.define_inflector
 
 ## Development
 
