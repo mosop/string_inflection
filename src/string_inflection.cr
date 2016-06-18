@@ -1,4 +1,4 @@
-require "./string_inflection/*"
+require "./string_inflection/version"
 
 module StringInflection
   def self.camel(s)
