@@ -73,7 +73,7 @@ module Case
 end
 ```
 
-This code defines all the inflector methods into the Case class. So you can:
+This code defines all the inflector methods into the Case module. So you can:
 
 ```crystal
 Case.camel("foo bar")
