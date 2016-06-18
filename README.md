@@ -25,14 +25,15 @@ StringInflection.snake("foo bar")  # => "foo_bar"
 StringInflection.kebab("foo bar")  # => "foo-bar"
 ```
 
-## The Case Module
-
-Would you like shorthand? You can use `Case` instead of the long name `StringInflection`.
+Or do you like shorthand? So you can use the `Case` module.
 
 ```crystal
 require "string_inflection/case"
 
-Case.camel("foo bar")
+Case.camel("foo bar")  # => "fooBar"
+Case.pascal("foo bar") # => "FooBar"
+Case.snake("foo bar")  # => "foo_bar"
+Case.kebab("foo bar")  # => "foo-bar"
 ```
 
 ## String#to
