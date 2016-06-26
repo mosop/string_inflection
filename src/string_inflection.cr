@@ -21,7 +21,8 @@ module StringInflection
 
   SINGULAR_PATTERNS = [
     [/([sxz])$/i, "\\1es"],
-    [/y$/i, "ies"]
+    [/y$/i, "ies"],
+    [/(m)an$/i, "\\1en"],
   ]
 
   def self.plural(s)
@@ -37,7 +38,7 @@ module StringInflection
   PLURAL_PATTERNS = [
     [/([hosxz])es$/i, "\\1"],
     [/ies$/i, "y"],
-    [/men$/i, "man"],
+    [/(m)en$/i, "\\1an"],
   ]
 
   def self.singular(s)

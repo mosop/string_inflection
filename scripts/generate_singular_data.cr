@@ -21,7 +21,7 @@ PATTERNS = [
   /y$/,
   # /on$/,
   # /am$/,
-  # /an$/,
+  /man$/,
   # /is$/,
 ]
 
@@ -60,10 +60,10 @@ File.open(__DIR__ + "/../src/string_inflection/singulars.cr", "w") do |f|
       # next if (/on$/ =~ singular)
       # next if (/am$/ =~ singular)
     elsif diff[:cut] == 2 && diff[:tail] == "en"
-      cuttail = "2  en!#{singular[(-[singular.size, 2].min)..-1]}"
+      cuttail = "2  en!#{singular[(-[singular.size, 3].min)..-1]}"
       SUMMARY[cuttail] ||= 0
       SUMMARY[cuttail] += 1
-      # next if (/an$/ =~ singular)
+      next if (/man$/ =~ singular)
     elsif diff[:cut] == 2 && diff[:tail] == "es"
       cuttail = "2  es!#{singular[(-[singular.size, 2].min)..-1]}"
       SUMMARY[cuttail] ||= 0
