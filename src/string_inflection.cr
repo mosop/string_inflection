@@ -1,6 +1,6 @@
-require "./string_inflection/version"
-require "./string_inflection/singulars"
-require "./string_inflection/plurals"
+require "./version"
+require "./singulars"
+require "./plurals"
 
 module StringInflection
   def self.camel(s)

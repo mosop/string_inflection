@@ -1,4 +1,4 @@
-require "../src/string_inflection/agid"
+require "../src/agid"
 
 SUMMARY = {} of String => Int32
 
@@ -22,7 +22,7 @@ PATTERNS = [
   /ies$/,
 ]
 
-File.open(__DIR__ + "/../src/string_inflection/plurals.cr", "w") do |f|
+File.open(__DIR__ + "/../src/plurals.cr", "w") do |f|
   f.puts <<-EOS
   module StringInflection
     @@plurals = {

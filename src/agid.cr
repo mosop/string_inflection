@@ -39,7 +39,7 @@ module StringInflection
     import_words
 
     def self.import_words
-      File.each_line(__DIR__ + "/../../ext/agid/infl.txt") do |line|
+      File.each_line(__DIR__ + "/../ext/agid/infl.txt") do |line|
         word = Word.import(line)
         next unless word.pos == :N && word.tags.size == 0
         singular = word.spell.downcase

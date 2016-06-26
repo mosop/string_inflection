@@ -1,4 +1,4 @@
-require "../string_inflection"
+require "./string_inflection"
 
 module Case
   extend ::StringInflection::StaticMethods
