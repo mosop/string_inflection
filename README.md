@@ -114,6 +114,8 @@ The handy database by Kevin Atkinson and other authors is significantly useful t
 
 ## Releases
 
+* v0.1.2
+  * StringInflection.plural
 * v0.1.1
   * Case
   * String#to
