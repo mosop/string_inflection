@@ -56,14 +56,14 @@ If you don't intend pollute the String's namespace with the method #to, the `Str
 
 ```crystal
 class String
-  StringInflection.define_inflector name: "inflectTo"
+  StringInflection.define_inflector name: "inflect_to"
 end
 ```
 
 And you can:
 
 ```crystal
-"foo bar".inflectTo.camel
+"foo bar".inflect_to.camel
 ```
 
 ## Mixins

@@ -9,7 +9,7 @@ module StringInflection::Test
         StaticMethods.{{method.id}}(source).should eq expected
         InstanceMethods.new(source).{{method.id}}.should eq expected
         source.to.{{method.id}}.should eq expected
-        source.inflectTo.{{method.id}}.should eq expected
+        source.inflect_to.{{method.id}}.should eq expected
       end
     end
   end

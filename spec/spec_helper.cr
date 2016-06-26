@@ -20,5 +20,5 @@ module StringInflection::Test
 end
 
 class String
-  ::StringInflection.define_inflector name: "inflectTo", class_name: "InflectTo"
+  ::StringInflection.define_inflector name: "inflect_to", class_name: "InflectTo"
 end

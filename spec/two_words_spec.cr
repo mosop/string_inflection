@@ -18,7 +18,7 @@ module StringInflection::Test
           StaticMethods.{{method.id}}(source).should eq {{two_words}}
           InstanceMethods.new(source).{{method.id}}.should eq {{two_words}}
           source.to.{{method.id}}.should eq {{two_words}}
-          source.inflectTo.{{method.id}}.should eq {{two_words}}
+          source.inflect_to.{{method.id}}.should eq {{two_words}}
         end
       end
     end
