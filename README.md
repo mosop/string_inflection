@@ -23,6 +23,7 @@ StringInflection.camel("foo bar")  # => "fooBar"
 StringInflection.pascal("foo bar") # => "FooBar"
 StringInflection.snake("foo bar")  # => "foo_bar"
 StringInflection.kebab("foo bar")  # => "foo-bar"
+StringInflection.plural("child")   # => "children"
 ```
 
 Or do you like shorthand? So you can use the `Case` module.
@@ -34,6 +35,7 @@ Case.camel("foo bar")  # => "fooBar"
 Case.pascal("foo bar") # => "FooBar"
 Case.snake("foo bar")  # => "foo_bar"
 Case.kebab("foo bar")  # => "foo-bar"
+Case.plural("child")   # => "children"
 ```
 
 ## String#to
@@ -103,6 +105,12 @@ class String
   end
 end
 ```
+
+## Special Thanks
+
+### [Automatically Generated Inflection Database (AGID)](http://wordlist.aspell.net/agid-readme/)
+
+The handy database by Kevin Atkinson and other authors is significantly useful to generate irregular singular/plural forms. You can see the license in [README](ext/agid/README).
 
 ## Releases
 
