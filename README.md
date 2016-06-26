@@ -24,6 +24,7 @@ StringInflection.pascal("foo bar") # => "FooBar"
 StringInflection.snake("foo bar")  # => "foo_bar"
 StringInflection.kebab("foo bar")  # => "foo-bar"
 StringInflection.plural("child")   # => "children"
+StringInflection.singular("data")  # => "datum"
 ```
 
 Or do you like shorthand? So you can use the `Case` module.
@@ -36,6 +37,7 @@ Case.pascal("foo bar") # => "FooBar"
 Case.snake("foo bar")  # => "foo_bar"
 Case.kebab("foo bar")  # => "foo-bar"
 Case.plural("child")   # => "children"
+Case.singular("data")  # => "datum"
 ```
 
 ## String#to
@@ -114,6 +116,8 @@ The handy database by Kevin Atkinson and other authors is significantly useful t
 
 ## Releases
 
+* v0.1.3
+  * StringInflection.singular
 * v0.1.2
   * StringInflection.plural
 * v0.1.1

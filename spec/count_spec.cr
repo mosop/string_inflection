@@ -12,7 +12,11 @@ module StringInflection::Test
     end
   end
 
-  describe "plural" do
+  describe "StringInflection.plural" do
     count "plural", "child", "children"
+  end
+
+  describe "StringInflection.singular" do
+    count "singular", "data", "datum"
   end
 end

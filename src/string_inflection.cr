@@ -1,5 +1,6 @@
 require "./string_inflection/version"
 require "./string_inflection/singulars"
+require "./string_inflection/plurals"
 
 module StringInflection
   def self.camel(s)
@@ -33,6 +34,22 @@ module StringInflection
     s + "s"
   end
 
+  PLURAL_PATTERNS = [
+    [/([hosxz])es$/i, "\\1"],
+    [/ies$/i, "y"],
+    [/men$/i, "man"],
+  ]
+
+  def self.singular(s)
+    diff = plurals[s.split(/[^\w]/).last.downcase]?
+    return s[0..(-1 - diff[:cut])] + diff[:tail] if diff
+    PLURAL_PATTERNS.each do |i|
+      result = s.sub(i[0], i[1])
+      return result if result != s
+    end
+    s[0..-2]
+  end
+
   macro define_static_method(method)
     def {{method.id}}(s)
       ::StringInflection.{{method.id}}(s)
@@ -45,6 +62,7 @@ module StringInflection
     ::StringInflection.define_static_method snake
     ::StringInflection.define_static_method kebab
     ::StringInflection.define_static_method plural
+    ::StringInflection.define_static_method singular
   end
 
   macro define_instance_method(method, object)
@@ -59,6 +77,7 @@ module StringInflection
     ::StringInflection.define_instance_method snake, {{object}}
     ::StringInflection.define_instance_method kebab, {{object}}
     ::StringInflection.define_instance_method plural, {{object}}
+    ::StringInflection.define_instance_method singular, {{object}}
   end
 
   module StaticMethods

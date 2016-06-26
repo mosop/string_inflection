@@ -1,6 +1,5 @@
 require "../src/string_inflection/agid"
 
-SUFFIXES = {} of String => Array(String)
 SUMMARY = {} of String => Int32
 
 def diff(singular, plural, substring = nil)

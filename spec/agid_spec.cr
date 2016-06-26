@@ -14,10 +14,8 @@ module StringInflection::Test
     end
   end
 
-  describe "Pluralization" do
+  describe "Agid" do
     count "plural", StringInflection::Agid.singulars_plurals
-  end
-
-  describe "Singularization" do
+    count "singular", StringInflection::Agid.plurals_singulars
   end
 end
