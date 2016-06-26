@@ -12,6 +12,19 @@ def diff(singular, plural, substring = nil)
   end
 end
 
+PATTERNS = [
+  # /h$/,
+  # /o$/,
+  /s$/,
+  /x$/,
+  /z$/,
+  /y$/,
+  # /on$/,
+  # /am$/,
+  # /an$/,
+  # /is$/,
+]
+
 File.open(__DIR__ + "/../src/string_inflection/singulars.cr", "w") do |f|
   f.puts <<-EOS
   module StringInflection
@@ -21,23 +34,25 @@ File.open(__DIR__ + "/../src/string_inflection/singulars.cr", "w") do |f|
   StringInflection::Agid.singulars_plurals.each do |singular, plural|
     diff = diff(singular, plural)
     if diff[:cut] == 0 && diff[:tail] == "s"
-      if /(?:[sxz]|[y])$/ !~ singular
-        SUMMARY["-  s"] ||= 0
-        SUMMARY["-  s"] += 1
+      if PATTERNS.all?{|i| i !~ singular}
+        SUMMARY["-"] ||= 0
+        SUMMARY["-"] += 1
         next
       end
     elsif diff[:cut] == 0 && diff[:tail] == "es"
       cuttail = "0  es!#{singular[(-[singular.size, 1].min)..-1]}"
       SUMMARY[cuttail] ||= 0
       SUMMARY[cuttail] += 1
-      next if (/[sxz]$/ =~ singular)
-      # next if (/[h]$/ =~ singular)
-      # next if (/[o]$/ =~ singular)
+      # next if (/h$/ =~ singular)
+      # next if (/o$/ =~ singular)
+      next if (/s$/ =~ singular)
+      next if (/x$/ =~ singular)
+      next if (/z$/ =~ singular)
     elsif diff[:cut] == 1 && diff[:tail] == "ies"
       cuttail = "1  ies!#{singular[(-[singular.size, 1].min)..-1]}"
       SUMMARY[cuttail] ||= 0
       SUMMARY[cuttail] += 1
-      next if (/[y]$/ =~ singular)
+      next if (/y$/ =~ singular)
     elsif diff[:cut] == 2 && diff[:tail] == "a"
       cuttail = "2  a!#{singular[(-[singular.size, 2].min)..-1]}"
       SUMMARY[cuttail] ||= 0
