@@ -54,7 +54,7 @@ Then you can:
 "foo bar".to.camel # => "fooBar"
 ```
 
-If you don't intend pollute the String's namespace with the method #to, the `StringInflection.define_inflector` macro helps you.
+If you don't intend to pollute the String's namespace with the method #to, the `StringInflection.define_inflector` macro helps you.
 
 ```crystal
 class String
