@@ -1,6 +1,6 @@
 # Crystal String Inflection
 
-Yet another library for string inflection written in Crystal.
+Yet another Crystal library for string inflection.
 
 [![Build Status](https://travis-ci.org/mosop/string_inflection.svg?branch=master)](https://travis-ci.org/mosop/string_inflection)
 
