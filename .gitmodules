@@ -1,0 +1,3 @@
+[submodule "submodules/agid"]
+	path = submodules/agid
+	url = https://github.com/mosop/agid.git

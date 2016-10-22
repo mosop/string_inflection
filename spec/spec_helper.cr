@@ -2,7 +2,6 @@ require "spec"
 require "../src/string_inflection"
 require "../src/case"
 require "../src/string/to"
-require "../src/agid"
 
 module StringInflection::Test
   class StaticMethods

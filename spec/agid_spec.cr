@@ -1,4 +1,5 @@
 require "./spec_helper"
+require "agid"
 
 module StringInflection::Test
   macro count(method, list)
@@ -15,7 +16,7 @@ module StringInflection::Test
   end
 
   describe "Agid" do
-    count "plural", StringInflection::Agid.singulars_plurals
-    count "singular", StringInflection::Agid.plurals_singulars
+    count "plural", Agid.singulars_plurals
+    count "singular", Agid.plurals_singulars
   end
 end
