@@ -19,41 +19,68 @@ module StringInflection
     s.gsub(/[\s\-]+/, "_").underscore.gsub(/_/, "-")
   end
 
-  SINGULAR_PATTERNS = [
-    [/([sxz])$/i, "\\1es"],
-    [/y$/i, "ies"],
-    [/(m)an$/i, "\\1en"],
+  SEPARATOR_PATTERN = /[^a-zA-Z0-9]|[a-z0-9](?=[A-Z])/
+  SINGULAR_SUFFIXES = [
+    {re: /([sxz])$/i, tail: ["es", "ES"]},
+    {re: /y$/i, tail: ["ies", "IES"]},
+    {re: /(m)an$/i, tail: ["en", "EN"]},
   ]
 
-  def self.plural(s)
-    diff = singulars[s.split(/[^\w]/).last.downcase]?
-    return s[0..(-1 - diff[:cut])] + diff[:tail] if diff
-    SINGULAR_PATTERNS.each do |i|
-      result = s.sub(i[0], i[1])
-      return result if result != s
+  def self.plural(this, **options)
+    a = this.split(SEPARATOR_PATTERN)
+    s = a.last.dup
+    dicts = options[:dicts]? || [SINGULARS]
+    tail = options[:up]? ? 1 : 0
+    if (begin
+      downcased = s.downcase
+      diff = nil
+      dicts.any?{|dict| diff = dict[downcased]?}
+      diff && (s = s[0..(-1 - diff[:cut])] + diff[:tail][tail])
+    end)
+    else
+      unless SINGULAR_SUFFIXES.any?{|i|
+        if md = i[:re].match(s)
+          s = "#{md.pre_match}#{md[1]?}#{i[:tail][tail]}"
+        end
+      }
+        s += (options[:up]? ? 'S' : 's')
+      end
     end
-    s + "s"
+    this[0, this.size - a.last.size] + s
   end
 
-  PLURAL_PATTERNS = [
-    [/([hosxz])es$/i, "\\1"],
-    [/ies$/i, "y"],
-    [/(m)en$/i, "\\1an"],
+  PLURAL_SUFFIXES = [
+    {re: /([hosxz])es$/i, tail: ["", ""]},
+    {re: /ies$/i, tail: ["y", "Y"]},
+    {re: /(m)en$/i, tail: ["an", "AN"]},
   ]
 
-  def self.singular(s)
-    diff = plurals[s.split(/[^\w]/).last.downcase]?
-    return s[0..(-1 - diff[:cut])] + diff[:tail] if diff
-    PLURAL_PATTERNS.each do |i|
-      result = s.sub(i[0], i[1])
-      return result if result != s
+  def self.singular(this, **options)
+    a = this.split(SEPARATOR_PATTERN)
+    s = a.last.dup
+    dicts = options[:dicts]? || [PLURALS]
+    tail = options[:up]? ? 1 : 0
+    if (begin
+      downcased = s.downcase
+      diff = nil
+      dicts.any?{|dict| diff = dict[downcased]?}
+      diff && (s = s[0..(-1 - diff[:cut])] + diff[:tail][tail])
+    end)
+    else
+      unless PLURAL_SUFFIXES.any?{|i|
+        if md = i[:re].match(s)
+          s = "#{md.pre_match}#{md[1]?}#{i[:tail][tail]}"
+        end
+      }
+        s = s.chop
+      end
     end
-    s[0..-2]
+    this[0, this.size - a.last.size] + s
   end
 
   macro define_static_method(method)
-    def {{method.id}}(s)
-      ::StringInflection.{{method.id}}(s)
+    def {{method.id}}(s, **options)
+      ::StringInflection.{{method.id}}(s, **options)
     end
   end
 
@@ -67,8 +94,8 @@ module StringInflection
   end
 
   macro define_instance_method(method, object)
-    def {{method.id}}
-      ::StringInflection.{{method.id}}({{object}})
+    def {{method.id}}(**options)
+      ::StringInflection.{{method.id}}({{object}}, **options)
     end
   end
 
