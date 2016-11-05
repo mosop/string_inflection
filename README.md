@@ -40,6 +40,22 @@ Case.plural("child")   # => "children"
 Case.singular("data")  # => "datum"
 ```
 
+## Upper Case Replacement
+
+With the `:up` option, `singular` / `plural` replaces a string with upper case letters.
+
+```crystal
+StringInflection.plural("CHILD", up: true) # => "CHILDREN"
+StringInflection.singular("DATA", up: true)  # => "DATUM"
+```
+
+Note: `:up` affects only a replaced substring.
+
+```crystal
+StringInflection.plural("child", up: true) # => "childREN"
+StringInflection.singular("data", up: true)  # => "datUM"
+```
+
 ## String#to
 
 The special extension `String#to` makes things object-oriented.
@@ -116,6 +132,8 @@ The handy database by Kevin Atkinson and other authors is significantly useful t
 
 ## Releases
 
+* v0.1.7
+  * Upper Case Replacement
 * v0.1.3
   * StringInflection.singular
 * v0.1.2
