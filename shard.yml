@@ -1,12 +1,7 @@
 name: string_inflection
-version: 0.1.6
+version: 0.1.7.1
 
 authors:
   - mosop
 
 license: MIT
-
-dependencies:
-  agid:
-    github: mosop/agid
-    version: ~> 0.1.0
