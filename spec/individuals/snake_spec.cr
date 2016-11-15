@@ -1,0 +1,5 @@
+require "../spec_helper"
+require "../../src/snake"
+require "../../src/case/snake"
+require "../../src/string/to/snake"
+require "./snake"

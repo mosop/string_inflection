@@ -1,5 +1,5 @@
 require "./string_inflection"
 
 module Case
-  extend ::StringInflection::StaticMethods
+  ::StringInflection.define_static_methods
 end

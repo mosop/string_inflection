@@ -68,70 +68,29 @@ Then you can:
 
 ```crystal
 "foo bar".to.camel # => "fooBar"
+"foo bar".to.pascal # => "FooBar"
+"foo bar".to.snake  # => "foo_bar"
+"foo bar".to.kebab  # => "foo-bar"
+"child".to.plural   # => "children"
+"data".to.singular  # => "datum"
 ```
 
-If you don't intend to pollute the String's namespace with the method #to, the `StringInflection.define_inflector` macro helps you.
+## Naming Methods
 
-```crystal
-class String
-  StringInflection.define_inflector name: "inflect_to"
-end
-```
+[WIP]
 
-And you can:
-
-```crystal
-"foo bar".inflect_to.camel
-```
-
-## Mixins
-
-You can mix the inflector methods into your own namespace.
-
-```crystal
-module Case
-  extend StringInflection::StaticMethods
-end
-```
-
-This code defines all the inflector methods into the Case module. So you can:
-
-```crystal
-Case.camel("foo bar")
-```
-
-You can also define the inflector methods as  instance methods.
-
-```crystal
-class String
-  StringInflection.define_instance_methods self
-end
-```
-
-And you can:
-
-```crystal
-"foo bar".camel
-```
-
-Calling the `StringInflection.define_instance_methods(object)` macro, the inflector methods will be defined like:
-
-```crystal
-class String
-  def camel
-    StringInflection.camel(self)
-  end
-end
-```
+You can define inflection methods with your own names under your own namespaces.
 
 ## Special Thanks
 
 ### [Automatically Generated Inflection Database (AGID)](http://wordlist.aspell.net/agid-readme/)
 
-The handy database by Kevin Atkinson and other authors is significantly useful to generate irregular singular/plural forms. You can see the license in [README](ext/agid/README).
+The handy database by Kevin Atkinson and other authors is significantly useful to generate irregular singular/plural forms. You can see the license in [README](https://github.com/mosop/agid/blob/master/src/ext/agid/README).
 
 ## Releases
 
+* v0.2.0
+  * (Breaking Change) StringInflection.define_inflector is separated into StringInflection.define_inflector and StringInflection.define_inflector_methods.
 * v0.1.7
   * Upper Case Replacement
 * v0.1.3

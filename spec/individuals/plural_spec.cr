@@ -1,0 +1,5 @@
+require "../spec_helper"
+require "../../src/plural"
+require "../../src/case/plural"
+require "../../src/string/to/plural"
+require "./plural"
