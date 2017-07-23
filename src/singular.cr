@@ -26,7 +26,7 @@ module StringInflection
           s = "#{md.pre_match}#{md[1]?}#{i[:tail][tail]}"
         end
       }
-        s = s.chop
+        s = s.rchop
       end
     end
     this[0, this.size - a.last.size] + s
